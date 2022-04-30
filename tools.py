@@ -47,3 +47,22 @@ def add_value_labels(ax, spacing=5):
             ha='center',                # Horizontally center label
             va=va)                      # Vertically align label differently for
                                         # positive and negative values.
+            
+ 
+# Criando os Bins para plotar o histograma;
+#Binning:
+def binning(col, cut_points, labels=None):
+  #Define min and max values:
+  minval = col.min()
+  maxval = col.max()
+
+  #cria lista adicionando min e max a cut_points
+  break_points = [minval] + cut_points + [maxval]
+
+  #se nenhum rótulo for definido, use rótulos default 0 ... (n-1)
+  if not labels:
+    labels = range(len(cut_points)+1)
+
+  #Binning usando a função cut
+  colBin = pd.cut(col,bins=break_points,labels=labels,include_lowest=True)
+  return colBin
